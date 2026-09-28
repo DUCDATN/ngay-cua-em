@@ -106,6 +106,9 @@ ol.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:
 .cheer{background:var(--okbg);color:#11643a;border-radius:var(--r-md);padding:14px 16px;font-weight:900;font-size:18px;text-align:center;margin:14px 0}
 /* ---------- Đổi sao ---------- */
 .shop{background:linear-gradient(135deg,#fff4d6,#ffe7f1);border-radius:var(--r-lg);padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+.shop .used{display:none;font-size:12px;font-weight:800;color:#8a5a00}
+.shop-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;font-weight:800;font-size:14px;color:#6b4b00}
+.shop-bar .why{flex:1;min-width:0}
 .shop-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
 .shop-head h2{font-size:22px;margin-right:auto}
 .shop-bal{background:#fff;border-radius:999px;padding:4px 14px;font-weight:900;font-size:18px}
@@ -247,21 +250,120 @@ table.t input:focus,table.t select:focus{border-color:var(--brand);background:#f
 ul.rules{margin:6px 0;padding-left:20px}
 ul.rules li{margin:4px 0}
 
+/* ---------- Điện thoại: gọn để thấy nhiều việc hơn trên một màn hình ---------- */
 @media (max-width:560px){
-  body{font-size:16px}
-  .hello h1{font-size:22px}
-  .hello .ava{width:46px;height:46px;font-size:26px}
+  body{font-size:15px}
+  .wrap{padding:6px 12px 28px}
+  .top{flex-wrap:nowrap;gap:8px;margin-bottom:8px}
+  .hello{gap:8px;min-width:0}
+  .hello .ava{width:36px;height:36px;font-size:22px;box-shadow:none}
+  .hello h1{font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hello p{font-size:12px;white-space:nowrap}
+  .top-right{gap:6px;flex:none}
+  .stars{min-height:34px;padding:2px 10px;font-size:16px;border-width:1.5px}
+  .parent-btn{min-height:34px;padding:2px 10px;border-width:1.5px}
   .parent-btn .lbl{display:none}
-  .hero{grid-template-columns:1fr;text-align:center}
-  .hero-ico{margin:0 auto}
-  .hero h2{font-size:24px}
-  .mini{grid-template-columns:repeat(2,1fr)}
-  .row{grid-template-columns:52px 44px 1fr auto;gap:8px;padding:8px}
-  .row .ico{width:44px;height:44px;font-size:24px}
-  .row.small{grid-template-columns:52px 44px 1fr}
-  .check span{min-width:60px}
-  .chip{font-size:15px}
+  .switch{margin-bottom:8px;padding:3px}
+  .switch button{min-height:36px;padding:4px;font-size:15px}
+  .daychips{gap:4px;margin-bottom:8px}
+  .chip{min-height:38px;font-size:14px;border-radius:12px;padding:2px 0;border-width:1.5px}
+  .chip small{display:none}
+  .chip.is-today:not([aria-pressed="true"]){background:#fff7dc}
+  /* Thẻ "Bây giờ": nằm ngang, gọn */
+  .hero{grid-template-columns:48px 1fr;gap:4px 10px;padding:10px 12px;margin-bottom:8px;border-radius:16px;border-width:2px}
+  .hero-ico{width:48px;height:48px;font-size:28px;border-radius:12px;align-self:start}
+  .hero small{font-size:10.5px}
+  .hero h2{font-size:18px;margin:0}
+  .hero p{font-size:12.5px;line-height:1.35}
+  .hero .bar{height:7px;margin:5px 0 1px}
+  .hero-next{padding:5px 10px;font-size:13px;gap:6px;border-radius:10px}
+  .hero-next small{font-size:10px}
+  /* Chỉ số: một hàng 4 ô */
+  .mini{grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:8px}
+  .mini div{padding:4px 2px;border-radius:10px;box-shadow:none;border:1px solid var(--line)}
+  .mini .e{font-size:15px}
+  .mini b{font-size:14px;line-height:1.2}
+  .mini small{font-size:9.5px;line-height:1.15;display:block}
+  /* Đổi sao: gọn */
+  .shop{padding:10px;border-radius:16px;margin-bottom:8px}
+  .shop-head{margin-bottom:2px}
+  .shop-head h2{font-size:16px}
+  .shop-bal{font-size:14px;padding:2px 10px}
+  .shop p{font-size:12px;margin:2px 0}
+  .offers{grid-template-columns:repeat(3,1fr);gap:6px;margin:6px 0 0}
+  .shop > p,.shop .meter{display:none}
+  .shop .used{display:inline}
+  .offer{min-height:50px;padding:4px 2px;font-size:12px;border-width:2px;border-radius:12px}
+  .offer .e{font-size:18px}
+  .offer small{font-size:11.5px}
+  .lock{font-size:12.5px;padding:6px 10px}
+  .cheer{font-size:15px;padding:8px 10px;margin:8px 0}
+  .report-btn{min-height:40px;font-size:15px;margin:2px 0 4px}
+  /* Dòng thời gian: mỗi việc một dòng gọn */
+  .part{font-size:16px;margin:10px 0 4px}
+  ol.tl{gap:4px}
+  .row{grid-template-columns:42px 30px minmax(0,1fr) auto;gap:8px;padding:5px 8px;border-radius:12px;border-width:2px;box-shadow:none;border-color:transparent;background:#fff}
+  .row .ico{width:30px;height:30px;font-size:17px;border-radius:9px}
+  .row .time{font-size:13.5px}
+  .row .time small{font-size:10px}
+  .row .body b{font-size:14.5px;line-height:1.25}
+  .row .body span{font-size:11.5px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row.small{grid-template-columns:42px 30px minmax(0,1fr);padding:0 8px;min-height:24px}
+  .row.small .ico{width:22px;height:22px;font-size:13px;justify-self:center}
+  .row.small .body b{font-size:12.5px}
+  .row.small .time{font-size:12px}
+  .check span{min-width:52px;min-height:34px;font-size:12.5px;border-width:2px;padding:0 6px}
+  .endrow{font-size:13px;margin-top:10px}
+  .week-actions .btn{min-height:40px;padding:6px 12px;font-size:14px}
+  /* Góc phụ huynh: tiêu đề gọn, các mục thành một hàng vuốt ngang */
+  .ptop{gap:6px;margin-bottom:8px}
+  .ptop h1{font-size:20px;width:100%}
+  .ptop .btn{min-height:36px;padding:4px 12px;font-size:14px}
+  .ptabs{flex-wrap:nowrap;overflow-x:auto;gap:5px;margin:0 -12px 10px;padding:0 12px 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .ptabs::-webkit-scrollbar{display:none}
+  .ptabs button{flex:none;min-height:36px;padding:4px 12px;font-size:14px;white-space:nowrap}
+  .card{padding:12px;margin-bottom:10px}
+  .card h2{font-size:19px}
+  .sub{font-size:14px}
 }
+@media (max-width:360px){
+  .hello p{display:none}
+  .row{grid-template-columns:38px 26px minmax(0,1fr) auto;gap:6px}
+  .mini small{font-size:8.5px}
+}
+
+/* ---------- Chỉ hiện việc còn lại ---------- */
+.tl-tools{display:flex;justify-content:flex-end;margin:6px 0 -2px}
+.tl-tools label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:800;color:var(--muted);cursor:pointer}
+.tl-tools input{width:18px;height:18px;accent-color:var(--brand)}
+body.hide-past .row.past:not(.now){display:none}
+body.hide-past .part.empty{display:none}
+
+/* ---------- Cả tuần dạng danh sách (điện thoại) ---------- */
+.wl{display:flex;flex-direction:column;gap:6px}
+.wl details{background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.wl summary{list-style:none;cursor:pointer;padding:8px 12px;display:flex;align-items:center;gap:8px;font-weight:900}
+.wl summary::-webkit-details-marker{display:none}
+.wl summary .d{font-family:'Baloo 2','Nunito',system-ui,sans-serif;font-size:17px;min-width:70px}
+.wl summary .m{font-size:11.5px;color:var(--muted);font-weight:800;line-height:1.3;flex:1}
+.wl summary::after{content:'▾';color:var(--muted);transition:transform .2s}
+.wl details[open] summary::after{transform:rotate(180deg)}
+.wl details.today{border:2px solid #ffd166}
+.wl ol{list-style:none;margin:0;padding:0 8px 8px;display:flex;flex-direction:column;gap:3px}
+.wl li{display:grid;grid-template-columns:78px 22px minmax(0,1fr);gap:6px;align-items:center;font-size:13px;padding:3px 6px;border-radius:8px}
+.wl li .t{font-weight:800;color:var(--muted);font-size:12px;white-space:nowrap}
+.wl li .l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
+.wk-mode{display:flex;justify-content:flex-end;margin:-4px 0 6px}
+.daypick-s{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.daypick-s button{border:1.5px solid var(--line);background:#fff;border-radius:10px;min-height:38px;font-weight:900}
+.daypick-s button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+td.tt{width:92px}
+td.tt input{display:block;width:100%;padding:3px 2px;font-size:13px}
+td.fx{text-align:left;padding:10px}
+.fx-g{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;margin-bottom:8px}
+.fx-g label{display:flex;flex-direction:column;font-size:12px;font-weight:800;color:var(--muted);gap:2px;text-align:left}
+.fx-g label.w2{grid-column:1/-1}
+.fx-g input,.fx-g select{border:1.5px solid var(--line)!important;border-radius:8px;min-height:38px;text-align:left!important;background:#fff!important}
 @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
 @media print{
   body{background:#fff}
@@ -300,8 +402,8 @@ ul.rules li{margin:4px 0}
     <div id="shop"></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <div id="cheer"></div>
-    <div id="reportBar"></div>
     <div id="timeline"></div>
+    <div id="reportBar"></div>
   </main>
 
   <!-- ========== CẢ TUẦN ========== -->
@@ -1088,6 +1190,9 @@ function setPtab(t){
   if(t==='giadinh') renderFamily();
   document.querySelectorAll('.ptabs button').forEach(b=>b.setAttribute('aria-selected', String(b.dataset.ptab===t)));
   document.querySelectorAll('.ptab').forEach(s=>s.hidden = s.id!=='p-'+t);
+  // hàng mục vuốt ngang trên điện thoại: cuộn mục đang chọn vào tầm nhìn
+  const on=document.querySelector(`.ptabs button[data-ptab="${t}"]`), bar=on&&on.parentElement;
+  if(bar && bar.scrollWidth>bar.clientWidth) bar.scrollTo({left:on.offsetLeft-bar.clientWidth/2+on.offsetWidth/2});
 }
 
 /* ---- Vẽ toàn bộ ---- */
@@ -1147,12 +1252,15 @@ function renderToday(){
   renderShop(isToday);
 
   // Dòng thời gian
+  const hp = isToday && hidePast();
+  document.body.classList.toggle('hide-past', hp);
   const parts=[['🌅','Buổi sáng',0,12*60],['☀️','Buổi chiều',12*60,18*60],['🌙','Buổi tối',18*60,1440]];
-  let h='';
+  let h = isToday ? `<div class="tl-tools"><label><input type="checkbox" data-hidepast ${hp?'checked':''}> Chỉ hiện việc còn lại</label></div>` : '';
   for(const [e,name,a,b] of parts){
     const rows=day.blocks.filter(x=>x.cat!=='sleep' && x.s>=a && x.s<b);
     if(!rows.length) continue;
-    h+=`<h2 class="part"><span aria-hidden="true">${e}</span>${name}</h2><ol class="tl">`;
+    const allPast = isToday && rows.every(x=>x.e<=nm);
+    h+=`<h2 class="part${allPast?' empty':''}"><span aria-hidden="true">${e}</span>${name}</h2><ol class="tl">`;
     rows.forEach(x=>{
       const c=CAT[x.cat], small=SMALL.has(x.cat);
       const cls=['row']; if(small) cls.push('small');
@@ -1194,8 +1302,12 @@ function renderShop(isToday){
   if(!isToday || !cap){ el.innerHTML=''; return; }
   const Rw=R_(), price=+Rw.price||5, used=bonusUsed(d), bal=starCount(), lock=shopLock(d);
   const offers=[['game',10],['game',20],['tiktok',10]];
+  if(lock){   // đang khóa: chỉ một dòng gọn
+    el.innerHTML=`<section class="shop shop-bar" aria-label="Đổi sao lấy giờ chơi"><span aria-hidden="true">🎁</span><span class="why">${lock}</span><span class="shop-bal">⭐ ${bal}</span></section>`;
+    return;
+  }
   el.innerHTML=`<section class="shop" aria-labelledby="shopTitle">
-    <div class="shop-head"><h2 id="shopTitle">🎁 Đổi sao lấy giờ chơi</h2><span class="shop-bal">⭐ ${bal}</span></div>
+    <div class="shop-head"><h2 id="shopTitle">🎁 Đổi sao lấy giờ chơi</h2><span class="used">đã đổi ${used}/${cap}'</span><span class="shop-bal">⭐ ${bal}</span></div>
     <p>Mỗi việc xong được 1⭐. Xong <b>sớm hơn giờ dự kiến</b> được thưởng thêm ⚡${+Rw.earlyBonus||0}⭐.</p>
     <div class="offers">${offers.map(([cat,min])=>{
       const cost=Math.ceil(min/10*price), name=cat==='game'?'game':'video';
@@ -1249,7 +1361,28 @@ function hero(bg,ico,small,title,tip,prog,next){
   </section>`;
 }
 
+const narrow=()=>matchMedia('(max-width:600px)').matches;
+let weekMode=null;   // null = tự chọn theo màn hình; 'grid' | 'list' = người dùng chọn
+function hidePast(){ try{ const v=localStorage.getItem('tgb_hidepast'); return v===null ? narrow() : v==='1'; }catch(e){ return narrow(); } }
+function renderWeekList(){
+  const ti=todayIdx();
+  const name=state.student.name?esc(state.student.name):'em';
+  let h=`<div class="wk-title">🗓️ Tuần này của <span>${name}</span></div>
+    <div class="wk-mode"><button class="btn sm" data-weekmode="grid">▦ Xem dạng bảng</button></div><div class="wl">`;
+  week.forEach((day,i)=>{
+    const s=day.stat;
+    const items=day.blocks.filter(b=>!['sleep','free','rest','travel'].includes(b.cat)).map(b=>{
+      const c=CAT[b.cat];
+      return `<li style="background:${c.bg}55"><span class="t">${fmt(b.s)}–${fmt(b.e)}</span><span aria-hidden="true">${iconOf(b)}</span><span class="l">${esc(b.label)}</span></li>`;
+    }).join('');
+    h+=`<details class="${i===ti?'today':''}" ${i===ti?'open':''}>
+      <summary><span class="d">${DAYS[i]}</span><span class="m">🌞 ${fmt(day.wake)} · 😴 ${fmt(day.bed)}<br>📚 ${fmtH(s.study)} · ⚽ ${fmtH(s.exercise)} · 🎮 ${fmtH(s.screen)}</span></summary>
+      <ol>${items}</ol></details>`;
+  });
+  document.getElementById('weekCard').innerHTML=h+'</div>';
+}
 function renderWeekGrid(){
+  if((weekMode||(narrow()?'list':'grid'))==='list') return renderWeekList();
   const name=state.student.name?esc(state.student.name):'em';
   const H=(VIEW_END-VIEW_START)*PX, ti=todayIdx();
   let h=`<div class="wk-title">🗓️ Tuần này của <span>${name}</span></div>
@@ -1274,7 +1407,7 @@ function renderWeekGrid(){
   });
   const legendCats=['school','extra','study','skill','exercise','game','tiktok','meal','free'];
   h+=`</div></div><div class="legend">${legendCats.map(k=>`<span>${ICON[k]} ${CAT[k].name}</span>`).join('')}<span style="color:#ef4444">┅ Tắt màn hình</span></div>`;
-  document.getElementById('weekCard').innerHTML=h;
+  document.getElementById('weekCard').innerHTML=(narrow()?'<div class="wk-mode"><button class="btn sm" data-weekmode="list">☰ Xem dạng danh sách</button></div>':'')+h;
 }
 
 function renderWarn(){
@@ -1299,8 +1432,19 @@ function renderWarn(){
 }
 
 /* ---- Góc phụ huynh: bảng nhập liệu ---- */
+let schoolDay=0;   // điện thoại: sửa thời khóa biểu từng ngày
 function renderSchool(){
   const G=state.school.grid;
+  if(narrow()){
+    let h=`<tr><td colspan="3" style="border:0;padding:0 0 6px"><div class="daypick-s">${DAYS.slice(0,6).map((d,j)=>`<button type="button" data-sday="${j}" aria-pressed="${j===schoolDay}">${DAYS_SHORT[j]}</button>`).join('')}</div></td></tr>
+      <tr><th>Tiết</th><th>Giờ</th><th>Môn – ${DAYS[schoolDay]}</th></tr>`;
+    G.forEach((row,i)=>{
+      h+=`<tr><th>${i+1}</th><td class="tt"><input type="time" data-k="school.periods.${i}.0" aria-label="Tiết ${i+1} bắt đầu"><input type="time" data-k="school.periods.${i}.1" aria-label="Tiết ${i+1} kết thúc"></td>
+        <td><input data-k="school.grid.${i}.${schoolDay}" placeholder="VD: Toán" aria-label="${DAYS[schoolDay]} tiết ${i+1}" style="text-align:left"></td></tr>`;
+    });
+    document.getElementById('schoolGrid').innerHTML=h;
+    return;
+  }
   let h=`<tr><th>Tiết</th><th>Giờ</th>${DAYS.slice(0,6).map(d=>`<th>${d}</th>`).join('')}</tr>`;
   G.forEach((row,i)=>{
     h+=`<tr><th>${i+1}</th><td style="min-width:170px"><input type="time" data-k="school.periods.${i}.0" style="width:48%" aria-label="Tiết ${i+1} bắt đầu"> <input type="time" data-k="school.periods.${i}.1" style="width:48%" aria-label="Tiết ${i+1} kết thúc"></td>`;
@@ -1310,6 +1454,22 @@ function renderSchool(){
   document.getElementById('schoolGrid').innerHTML=h;
 }
 function renderFixed(){
+  if(narrow()){   // điện thoại: mỗi buổi một thẻ nhỏ
+    let h=state.fixed.map((f,i)=>`<tr><td class="fx">
+      <div class="fx-g">
+        <label>Loại<select data-k="fixed.${i}.type">${['Học thêm','Trường','Khác'].map(x=>`<option>${x}</option>`).join('')}</select></label>
+        <label>Thứ<select data-k="fixed.${i}.day" data-num>${DAYS.map((d,j)=>`<option value="${j}">${d}</option>`).join('')}</select></label>
+        <label>Bắt đầu<input type="time" data-k="fixed.${i}.start"></label>
+        <label>Kết thúc<input type="time" data-k="fixed.${i}.end"></label>
+        <label class="w2">Môn / hoạt động<input data-k="fixed.${i}.name" placeholder="VD: Toán"></label>
+        <label>Ghi chú<input data-k="fixed.${i}.note" placeholder="GV, địa điểm"></label>
+        <label>Đi lại (phút)<input type="number" min="0" max="90" data-k="fixed.${i}.travel" data-num></label>
+      </div>
+      <button class="btn sm" data-del="${i}">🗑️ Xóa buổi này</button></td></tr>`).join('');
+    if(!state.fixed.length) h=`<tr><td class="sub">Chưa có lịch. Hãy nạp file Excel hoặc bấm "+ Thêm dòng".</td></tr>`;
+    document.getElementById('fixedTable').innerHTML=h;
+    return;
+  }
   let h=`<tr><th>Loại</th><th>Thứ</th><th>Bắt đầu</th><th>Kết thúc</th><th>Môn / hoạt động</th><th>Ghi chú</th><th>Di chuyển (phút)</th><th></th></tr>`;
   state.fixed.forEach((f,i)=>{
     h+=`<tr>
@@ -2087,6 +2247,23 @@ async function renderNotif(){
     ? `<div class="install"><span aria-hidden="true">🔔</span> Bật thông báo để ứng dụng nhắc con đến giờ học, giờ ngủ.<button class="btn pri sm" data-notif-ask>Bật</button></div>` : '';
 }
 document.addEventListener('click',e=>{ if(e.target.closest('[data-notif-ask]')) Remind.ask(); });
+
+/* ---- Điện thoại: ẩn việc đã qua, chọn dạng xem cả tuần ---- */
+document.addEventListener('change',e=>{
+  if(e.target.dataset && e.target.dataset.hidepast!==undefined){
+    try{ localStorage.setItem('tgb_hidepast', e.target.checked?'1':'0'); }catch(err){}
+    document.body.classList.toggle('hide-past', e.target.checked);
+  }
+});
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-weekmode]'); if(!b) return;
+  weekMode=b.dataset.weekmode; renderWeekGrid();
+});
+matchMedia('(max-width:600px)').addEventListener('change',()=>{ weekMode=null; renderWeekGrid(); if(view==='today') renderToday(); renderSchool(); renderFixed(); bindValues(); });
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-sday]'); if(!b) return;
+  schoolDay=+b.dataset.sday; renderSchool(); bindValues();
+});
 
 /* ---- Báo cáo trong ngày (con gửi bố mẹ bằng ảnh) ---- */
 function openReport(){
