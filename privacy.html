@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chính sách quyền riêng tư – Ngày của em</title>
+<style>
+  :root{--ink:#1f2a44;--muted:#5b6784;--brand:#2f6bff;--line:#e2e8f3}
+  *{box-sizing:border-box}
+  body{margin:0;background:#f2f8ff;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+  main{max-width:780px;margin:0 auto;padding:20px 16px 48px}
+  h1{color:var(--brand);font-size:28px;line-height:1.2;margin:8px 0}
+  h2{font-size:20px;margin:28px 0 6px;color:#334a80}
+  .card{background:#fff;border-radius:16px;padding:14px 18px;margin:10px 0;box-shadow:0 4px 16px rgba(31,42,68,.06)}
+  .muted{color:var(--muted)}
+  a{color:var(--brand)}
+  .back{display:inline-block;margin-bottom:8px;font-weight:700;text-decoration:none;padding:10px 0}
+  table{border-collapse:collapse;width:100%;font-size:15px} td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top} th{background:#f4f7fc}
+  hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="./">‹ Quay lại ứng dụng</a>
+  <h1>Chính sách quyền riêng tư</h1>
+  <p class="muted">Ứng dụng: <b>Ngày của em</b> · Nhà phát triển: <b>Bản dùng riêng trong gia đình</b> · Cập nhật: 2026-09-28</p>
+
+  <div class="card">
+    <p><b>Tóm tắt:</b> Ngày của em giúp gia đình sắp xếp thời gian biểu cho học sinh. Ứng dụng <b>không có quảng cáo</b>, <b>không theo dõi người dùng</b>, <b>không bán hay chia sẻ dữ liệu</b> cho bên thứ ba vì mục đích thương mại. Dữ liệu chỉ dùng để ứng dụng hoạt động.</p>
+  </div>
+
+  <h2>1. Dữ liệu ứng dụng lưu</h2>
+  <div class="card">
+    <table>
+      <tr><th>Dữ liệu</th><th>Mục đích</th><th>Lưu ở đâu</th></tr>
+      <tr><td>Tên gọi của con (có thể là biệt danh), lớp</td><td>Hiển thị lời chào, lịch</td><td rowspan="3">Trên máy. Nếu phụ huynh bật <b>nhóm gia đình</b> thì lưu thêm trên máy chủ để đồng bộ giữa các máy trong gia đình</td></tr>
+      <tr><td>Thời khóa biểu, lịch học thêm, giờ sinh hoạt, cài đặt</td><td>Tự sắp xếp thời gian biểu, nhắc giờ</td></tr>
+      <tr><td>Việc con đã hoàn thành, số sao, các lần đổi thưởng</td><td>Hệ thống sao, cho phụ huynh theo dõi</td></tr>
+      <tr><td>Tên thiết bị do người dùng đặt (VD: "iPad của An")</td><td>Phân biệt các máy trong nhóm gia đình</td><td>Máy chủ (chỉ khi dùng nhóm gia đình)</td></tr>
+      <tr><td>Mã định danh ẩn danh của thiết bị</td><td>Xác định máy nào thuộc nhóm gia đình nào</td><td>Máy chủ (chỉ khi dùng nhóm gia đình)</td></tr>
+      <tr><td>Mật khẩu phụ huynh</td><td>Khóa phần cài đặt</td><td>Chỉ trên máy, ở dạng đã mã hóa một chiều (không đọc ngược được)</td></tr>
+    </table>
+    <p>Ứng dụng <b>không</b> thu thập: họ tên đầy đủ, email, số điện thoại, ảnh, vị trí, danh bạ, mã quảng cáo hay dữ liệu sức khỏe. Không có đăng nhập bằng tài khoản mạng xã hội.</p>
+  </div>
+
+  <h2>2. Máy chủ và bên xử lý dữ liệu</h2>
+  <div class="card">
+    <p>Khi dùng nhóm gia đình, dữ liệu được lưu trên <b>Google Firebase</b> (Cloud Firestore và Firebase Authentication ở chế độ ẩn danh) do Google LLC cung cấp, với vai trò bên xử lý dữ liệu. Dữ liệu được mã hóa khi truyền (HTTPS) và khi lưu. Quy tắc bảo mật chỉ cho phép <b>các máy trong cùng nhóm gia đình</b> đọc dữ liệu của nhóm. Chỉ máy của phụ huynh được sửa lịch và cài đặt.</p>
+    <p>Ứng dụng không dùng Firebase Analytics, không dùng công cụ quảng cáo hay theo dõi.</p>
+  </div>
+
+  <h2>3. Trẻ em và sự đồng ý của phụ huynh</h2>
+  <div class="card">
+    <p>Ứng dụng dành cho <b>phụ huynh và con</b> dùng cùng nhau. Phần cài đặt được khóa bằng mật khẩu phụ huynh. Chỉ phụ huynh mới tạo được nhóm gia đình, và phải <b>xác nhận đồng ý</b> việc lưu dữ liệu của con lên máy chủ trước khi tạo. Máy của con chỉ tham gia được khi có mã mời do phụ huynh tạo.</p>
+    <p>Chúng tôi xử lý dữ liệu của trẻ em theo Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân, và các quy định của App Store và Google Play về ứng dụng có người dùng là trẻ em.</p>
+  </div>
+
+  <h2>4. Thời gian lưu và xóa dữ liệu</h2>
+  <div class="card">
+    <p>Dữ liệu được lưu cho đến khi người dùng xóa. Có thể xóa bất cứ lúc nào ngay trong ứng dụng: <b>Góc phụ huynh → Gia đình &amp; cài đặt → Xóa toàn bộ dữ liệu</b>.</p>
+    <ul>
+      <li>Trên máy của phụ huynh: xóa nhóm gia đình cùng toàn bộ dữ liệu của nhóm trên máy chủ, tài khoản ẩn danh và dữ liệu trên máy.</li>
+      <li>Trên máy của con: rời nhóm, xóa tài khoản ẩn danh và dữ liệu trên máy.</li>
+    </ul>
+    <p>Gỡ ứng dụng sẽ xóa dữ liệu trên máy đó. Nếu không còn truy cập được ứng dụng, hãy gửi yêu cầu xóa tới email bên dưới. Chúng tôi xử lý trong vòng 30 ngày.</p>
+  </div>
+
+  <h2>5. Quyền của bạn</h2>
+  <div class="card">
+    <p>Bạn có quyền xem, sửa, xuất (Góc phụ huynh → Dữ liệu → Lưu ra file) và xóa dữ liệu, cũng như rút lại sự đồng ý bằng cách xóa nhóm gia đình.</p>
+  </div>
+
+  <h2>6. Liên hệ</h2>
+  <div class="card">
+    <p>Bản dùng riêng trong gia đình · Email: <a href="mailto:(không áp dụng – dữ liệu chỉ lưu trên máy)">(không áp dụng – dữ liệu chỉ lưu trên máy)</a></p>
+    <p class="muted">Khi chính sách thay đổi, ngày cập nhật ở đầu trang sẽ thay đổi theo. Thay đổi quan trọng sẽ được thông báo trong ứng dụng.</p>
+  </div>
+
+  <hr>
+  <h1 lang="en">Privacy Policy (English summary)</h1>
+  <div class="card" lang="en">
+    <p><b>Ngày của em</b> helps families plan a student's daily schedule. It contains <b>no ads, no tracking and no third-party analytics</b>, and never sells or shares data.</p>
+    <p><b>Data stored:</b> the child's nickname and class, school timetable, routine settings, completed tasks, stars and rewards, user-chosen device names, and an anonymous device identifier. The parent PIN is stored only on the device as a one-way hash. We do not collect full names, email, phone numbers, photos, location or advertising identifiers.</p>
+    <p><b>Where:</b> on the device. Only if a parent creates a <b>family group</b> is the data also stored in Google Firebase (Cloud Firestore, anonymous Firebase Authentication) to sync the family's devices. Access is restricted to devices in the same family group. Only parent devices can change settings.</p>
+    <p><b>Children:</b> settings are protected by a parental PIN. Only a parent can create a family group, after giving explicit consent. A child's device can join only with an invite code created by the parent.</p>
+    <p><b>Deletion:</b> in the app, go to Parents → Family &amp; settings → Delete all data. On a parent device this deletes the family group and all of its server data. On a child device it leaves the group and deletes the anonymous account and local data. You can also email us, and we will act within 30 days.</p>
+    <p><b>Contact:</b> Bản dùng riêng trong gia đình · <a href="mailto:(không áp dụng – dữ liệu chỉ lưu trên máy)">(không áp dụng – dữ liệu chỉ lưu trên máy)</a> · Last updated 2026-09-28</p>
+  </div>
+</main>
+</body>
+</html>
