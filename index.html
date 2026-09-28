@@ -1143,7 +1143,8 @@ function kidTip(b){
 /* ---- Ngày tháng & sao ---- */
 const DEMO=isDemo();
 const DEMO_T=(new URLSearchParams(location.search).get('t')||'').match(/^(\d{1,2}):(\d{2})$/);
-const nowD=()=>{ const n=new Date(); if(DEMO_T) n.setHours(+DEMO_T[1],+DEMO_T[2],0,0); return n; };
+const DEMO_D=(new URLSearchParams(location.search).get('d')||'').match(/^[0-6]$/);   // d=0..6: cố định thứ (ảnh chụp)
+const nowD=()=>{ const n=new Date(); if(DEMO_D){ n.setDate(n.getDate()+(+DEMO_D[0]-(n.getDay()+6)%7)); } if(DEMO_T) n.setHours(+DEMO_T[1],+DEMO_T[2],0,0); return n; };
 const todayIdx=()=>(nowD().getDay()+6)%7;
 const nowMin=()=>{ const n=nowD(); return n.getHours()*60+n.getMinutes(); };
 function dateOf(d){ const n=nowD(); return new Date(n.getFullYear(),n.getMonth(),n.getDate()-todayIdx()+d); }
@@ -2027,6 +2028,7 @@ function installHtml(){
 }
 function renderInstall(){
   const el=$id('installBanner'); if(!el) return;
+  if(isDemo()){ el.innerHTML=''; return; }
   let dismissed=false; try{ dismissed=localStorage.getItem('tgb_install_hide')==='1'; }catch(e){}
   el.innerHTML = (!isWeb() || isStandalone() || dismissed || (!installEvt && !isIOS())) ? '' :
     `<div class="install"><span aria-hidden="true">📲</span> Cài phần mềm lên máy để mở nhanh như một ứng dụng.
@@ -2429,6 +2431,7 @@ if(DEMO){
   const v=new URLSearchParams(location.search).get('view');
   if(v==='week') setView('week');
   if(v==='parent'){ parentUnlocked=true; setView('parent'); setPtab(new URLSearchParams(location.search).get('tab')||'warn'); }
+  if(new URLSearchParams(location.search).get('open')==='report') setTimeout(openReport,100);
   // hide=id1,id2: ẩn bớt các khối phía trên để khối cần giới thiệu nằm ở đầu ảnh chụp
   (new URLSearchParams(location.search).get('hide')||'').split(',').filter(Boolean)
     .forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });

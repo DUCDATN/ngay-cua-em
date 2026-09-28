@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ngày của em – Thời gian biểu thông minh cho con</title>
+<meta name="description" content="Nhập thời khóa biểu một lần, phần mềm tự sắp xếp cả ngày cho con: đủ giấc ngủ, có giờ tự học, vận động, giải trí có giới hạn. Nhắc giờ, sao thưởng, báo cáo cho bố mẹ. Miễn phí, không quảng cáo.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ngày của em – Con tự biết giờ nào học, giờ nào chơi">
+<meta property="og:description" content="Thời gian biểu khoa học cho học sinh: nhắc giờ, sao thưởng, báo cáo cho bố mẹ. Miễn phí, không quảng cáo, không cần đăng ký.">
+<meta property="og:image" content="https://ducdatn.github.io/ngay-cua-em/anh/og.png">
+<meta name="theme-color" content="#2f6bff">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="vendor/fonts.css">
+<style>
+:root{
+  --bg:#f2f8ff; --card:#fff; --ink:#1f2a44; --muted:#5b6784; --line:#e2e8f3;
+  --brand:#2f6bff; --brand-2:#1d4ed8; --sun:#ffb020; --sun-soft:#fff4d6; --ok:#16a34a; --pink:#ffe4f0;
+  --r:22px; --shadow:0 4px 0 rgba(31,42,68,.05),0 16px 40px rgba(31,42,68,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 'Nunito',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:'Baloo 2','Nunito',system-ui,sans-serif;line-height:1.15;margin:0}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--brand)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 24px;font-weight:900;font-size:18px;text-decoration:none;border:2px solid transparent;min-height:52px}
+.btn.pri{background:var(--brand);color:#fff;box-shadow:0 8px 20px rgba(47,107,255,.35)}
+.btn.pri:hover{background:var(--brand-2)}
+.btn.ghost{background:#fff;color:var(--brand);border-color:#cfdcff}
+:focus-visible{outline:3px solid var(--brand-2);outline-offset:3px;border-radius:12px}
+section{padding:64px 0}
+.eyebrow{display:inline-block;background:#e3edff;color:var(--brand-2);font-weight:900;font-size:14px;border-radius:999px;padding:4px 14px;margin-bottom:12px;letter-spacing:.02em}
+.center{text-align:center}
+.lead{font-size:19px;color:var(--muted);max-width:720px}
+.center .lead{margin:12px auto 0}
+h2{font-size:clamp(28px,4.2vw,40px);color:#1f2a44}
+h2 .hl{color:var(--brand)}
+
+/* Thanh trên */
+.nav{position:sticky;top:0;z-index:10;background:rgba(242,248,255,.9);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(226,232,243,.8)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Baloo 2';font-weight:800;font-size:22px;color:var(--brand);text-decoration:none}
+.logo img{width:36px;height:36px;border-radius:10px}
+.nav .btn{padding:8px 18px;min-height:42px;font-size:16px}
+
+/* Mở đầu */
+.hero{padding:48px 0 24px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(34px,5.4vw,58px);color:#16204a}
+.hero h1 .hl{color:var(--brand)}
+.hero h1 .sun{color:#e29000}
+.hero .lead{margin:18px 0 26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.badges{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:22px;color:var(--muted);font-weight:800;font-size:15px}
+.badges span::before{content:'✓';color:var(--ok);font-weight:900;margin-right:6px}
+.hero-art{position:relative;display:flex;justify-content:center}
+.hero-art .p1{width:min(360px,78%);filter:drop-shadow(0 30px 40px rgba(31,42,68,.25));position:relative;z-index:2}
+.hero-art .p2{position:absolute;width:min(300px,62%);right:-2%;bottom:-6%;transform:rotate(6deg);filter:drop-shadow(0 20px 30px rgba(31,42,68,.2));z-index:1;opacity:.96}
+.hero-art .blob{position:absolute;inset:8% 4% 4% 4%;background:radial-gradient(circle at 30% 30%,#fff3c4 0,#ffe08a 30%,transparent 62%),radial-gradient(circle at 70% 70%,#cfe0ff 0,#a9c4ff 35%,transparent 65%);border-radius:50%;filter:blur(10px);z-index:0}
+
+/* Nỗi lo */
+.pains{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.pain{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.pain .e{font-size:36px;line-height:1}
+.pain h3{font-size:20px;margin:10px 0 6px}
+.pain p{margin:0;color:var(--muted);font-size:15.5px}
+.turn{margin:32px auto 0;max-width:760px;background:var(--sun-soft);border-radius:var(--r);padding:20px 24px;font-size:19px;font-weight:800;text-align:center;color:#5b3e00}
+
+/* 3 bước */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;counter-reset:s}
+.step{background:#fff;border-radius:var(--r);padding:26px 22px 22px;box-shadow:var(--shadow);position:relative}
+.step::before{counter-increment:s;content:counter(s);position:absolute;top:-18px;left:22px;width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;font-weight:900;font-size:20px;display:grid;place-items:center;box-shadow:0 6px 14px rgba(47,107,255,.35)}
+.step h3{font-size:21px;margin:8px 0 6px}
+.step p{margin:0;color:var(--muted);font-size:15.5px}
+.step .t{display:inline-block;margin-top:10px;font-weight:900;color:var(--brand-2);font-size:14px;background:#e3edff;border-radius:999px;padding:2px 10px}
+
+/* Tính năng */
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:36px 0}
+.feat.rev .shot{order:2}
+.feat .shot{display:flex;justify-content:center}
+.feat .shot img{width:min(320px,80%);filter:drop-shadow(0 26px 36px rgba(31,42,68,.2))}
+.feat .shot.wide img{width:min(520px,100%)}
+.feat h3{font-size:clamp(26px,3.4vw,34px);margin:0 0 12px;color:#16204a}
+.feat ul{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:10px}
+.feat li{display:grid;grid-template-columns:30px 1fr;gap:8px;font-size:16.5px}
+.feat li b{color:#16204a}
+.quote{margin-top:16px;border-left:4px solid var(--sun);padding:6px 0 6px 14px;color:#5b3e00;font-weight:800}
+
+/* Khoa học */
+.science{background:linear-gradient(180deg,#e6f1ff,#f2f8ff)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.stat{background:#fff;border-radius:var(--r);padding:22px;text-align:center;box-shadow:var(--shadow)}
+.stat .e{font-size:34px}
+.stat b{display:block;font-family:'Baloo 2';font-size:30px;color:var(--brand-2);line-height:1.1;margin-top:6px}
+.stat span{display:block;font-weight:800;margin-top:4px}
+.stat small{display:block;color:var(--muted);margin-top:6px;font-size:13px}
+.note{margin:22px auto 0;max-width:760px;text-align:center;color:var(--muted);font-size:15px}
+
+/* Tin cậy */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+.trust > div{background:#fff;border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.trust .e{font-size:30px}
+.trust h3{font-size:19px;margin:8px 0 4px}
+.trust p{margin:0;color:var(--muted);font-size:15px}
+
+/* Bắt đầu */
+.start{background:#16204a;color:#fff;border-radius:32px;padding:44px;display:grid;grid-template-columns:1.3fr .7fr;gap:32px;align-items:center}
+.start h2{color:#fff}
+.start ol{margin:18px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:10px;font-size:17px}
+.start ol b{color:#ffd166}
+.start .qr{background:#fff;border-radius:22px;padding:18px;text-align:center;color:var(--ink)}
+.start .qr svg{width:180px;height:180px;margin:0 auto;display:block}
+.start .qr p{margin:8px 0 0;font-weight:800;font-size:14px;color:var(--muted)}
+.start .btn.pri{margin-top:22px}
+
+/* Hỏi đáp */
+.faq{max-width:820px;margin:28px auto 0;display:flex;flex-direction:column;gap:10px}
+.faq details{background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:16px 20px;font-weight:900;font-size:17px;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:24px;line-height:1;color:var(--brand)}
+.faq details[open] summary::after{content:'–'}
+.faq details p{margin:0;padding:0 20px 16px;color:var(--muted)}
+
+.final{text-align:center;padding:72px 0 80px}
+.final h2{font-size:clamp(30px,4.6vw,46px)}
+.final .btn{margin-top:24px}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media (max-width:900px){
+  .hero .wrap{grid-template-columns:1fr;gap:28px;text-align:center}
+  .hero .cta,.badges{justify-content:center}
+  .hero .lead{margin-left:auto;margin-right:auto}
+  .pains,.trust,.stats{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr;gap:28px}
+  .feat,.feat.rev{grid-template-columns:1fr;gap:20px;text-align:left}
+  .feat.rev .shot{order:0}
+  .start{grid-template-columns:1fr;padding:30px 22px}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  section{padding:44px 0}
+  .wrap{padding:0 16px}
+  .pains,.trust,.stats{grid-template-columns:1fr}
+  .stat{display:grid;grid-template-columns:auto 1fr;text-align:left;gap:4px 14px;align-items:center}
+  .stat .e{grid-row:span 3}
+  .stat b{margin:0}
+  .btn{width:100%}
+  .nav .btn{width:auto}
+  .hero-art .p2{display:none}
+  .hero-art .p1{width:min(300px,82%)}
+}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#"><img src="icons/icon-192.png" alt="">Ngày của em</a>
+    <a class="btn pri" href="./">Dùng thử miễn phí</a>
+  </div>
+</header>
+
+<main>
+<!-- MỞ ĐẦU -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Thời gian biểu cho học sinh THCS</span>
+      <h1>Con <span class="hl">tự biết</span> giờ nào học, giờ nào chơi.<br><span class="sun">Bố mẹ bớt phải nhắc.</span></h1>
+      <p class="lead">Nhập thời khóa biểu một lần. Phần mềm tự sắp xếp cả ngày của con: <b>đủ giấc ngủ, có giờ tự học, vận động và giải trí có giới hạn</b>. Con được nhắc giờ, làm xong việc thì nhận sao, cuối ngày gửi báo cáo cho bố mẹ.</p>
+      <div class="cta">
+        <a class="btn pri" href="./">📲 Dùng miễn phí ngay</a>
+        <a class="btn ghost" href="#cach-hoat-dong">Xem cách hoạt động</a>
+      </div>
+      <div class="badges"><span>Miễn phí</span><span>Không quảng cáo</span><span>Không cần đăng ký</span><span>iPhone · iPad · Android · Máy tính</span></div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="blob"></div>
+      <img class="p1" src="anh/bay-gio.webp" alt="" width="400" height="773">
+      <img class="p2" src="anh/bao-cao.webp" alt="" width="400" height="773" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- NỖI LO -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">Có quen không?</span>
+    <h2>Buổi tối ở nhà bạn có giống thế này?</h2>
+    <div class="pains">
+      <div class="pain"><div class="e">🗣️</div><h3>"Con ơi, học bài chưa?"</h3><p>Câu hỏi lặp lại mỗi tối. Bố mẹ mệt, con cũng khó chịu.</p></div>
+      <div class="pain"><div class="e">🎮</div><h3>Game, video đến khuya</h3><p>"Thêm 5 phút nữa thôi" thành cả tiếng. Sáng hôm sau dậy không nổi.</p></div>
+      <div class="pain"><div class="e">📚</div><h3>Lịch học chồng chéo</h3><p>Học chính, học thêm dày đặc. Con mệt mà vẫn thiếu thời gian tự học, ôn bài.</p></div>
+      <div class="pain"><div class="e">🤷</div><h3>Không biết con làm được gì</h3><p>Đi làm về muộn, chẳng rõ hôm nay con đã học gì, vận động chưa, ngủ lúc mấy giờ.</p></div>
+    </div>
+    <p class="turn">Nhiều khi con không lười. Con chỉ chưa có <u>một lịch rõ ràng</u> để tự theo, và chưa có lý do để muốn theo.</p>
+  </div>
+</section>
+
+<!-- 3 BƯỚC -->
+<section id="cach-hoat-dong" style="padding-top:24px">
+  <div class="wrap center">
+    <span class="eyebrow">Đơn giản trong 3 bước</span>
+    <h2>Bố mẹ nhập <span class="hl">một lần</span>, con theo <span class="hl">mỗi ngày</span></h2>
+    <div class="steps" style="text-align:left">
+      <div class="step"><h3>Bố mẹ nhập thời khóa biểu</h3><p>Thời khóa biểu trên lớp, lịch học thêm, giờ dậy, giờ ngủ. Có sẵn mẫu cho con học buổi sáng hoặc buổi chiều, nạp được từ Excel.</p><span class="t">⏱ Khoảng 5 phút</span></div>
+      <div class="step"><h3>Phần mềm tự xếp lịch khoa học</h3><p>Tự học đúng môn của buổi học tiếp theo, học 40 phút rồi nghỉ 10 phút. Có giờ vận động, giờ rèn kỹ năng. Giờ chơi chỉ có sau khi học xong.</p><span class="t">⚡ Tức thì</span></div>
+      <div class="step"><h3>Con tự giác theo lịch</h3><p>Điện thoại, iPad nhắc đúng giờ. Con bấm "Xong" để nhận sao, cuối ngày gửi báo cáo cho bố mẹ qua Zalo.</p><span class="t">🌞 Mỗi ngày</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TÍNH NĂNG -->
+<section style="padding-top:16px">
+  <div class="wrap">
+    <div class="center"><span class="eyebrow">Con thích dùng, bố mẹ yên tâm</span><h2>Mọi thứ con cần, gói gọn trên <span class="hl">một màn hình</span></h2></div>
+
+    <div class="feat">
+      <div class="shot"><img src="anh/bay-gio.webp" alt="Màn hình Hôm nay: thẻ Bây giờ đang Tự học Toán, còn 20 phút, việc tiếp theo là Ăn trưa" width="400" height="773" loading="lazy"></div>
+      <div>
+        <h3>📍 Nhìn là biết bây giờ làm gì</h3>
+        <p class="lead">Không cần hỏi bố mẹ, không cần nhớ. Mở ra là thấy ngay việc đang làm, còn bao lâu, việc tiếp theo là gì.</p>
+        <ul>
+          <li><span>⏰</span><span><b>Nhắc giờ tự động</b> qua ứng dụng Lịch của điện thoại: giờ tự học, đi học, vận động, tắt màn hình, đi ngủ.</span></li>
+          <li><span>📚</span><span><b>Tự học đúng môn</b>: buổi sáng chuẩn bị bài cho tiết chiều, buổi tối chuẩn bị cho ngày mai. Hôm trước học thêm thì hôm sau có giờ làm bài tập học thêm.</span></li>
+          <li><span>🧒</span><span><b>Giao diện dành cho trẻ</b>: chữ to, biểu tượng vui, lời nhắc ngắn gọn dễ hiểu.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feat rev">
+      <div class="shot"><img src="anh/doi-sao.webp" alt="Đổi sao lấy giờ chơi: 10 phút game đổi 5 sao, có giới hạn 20 phút mỗi ngày" width="400" height="773" loading="lazy"></div>
+      <div>
+        <h3>⭐ Làm xong việc là có sao, đổi sao lấy giờ chơi</h3>
+        <p class="lead">Biến "phải làm" thành "muốn làm". Mỗi việc xong được 1 sao, <b>xong sớm hơn dự kiến</b> được thưởng thêm.</p>
+        <ul>
+          <li><span>🎮</span><span>Con dùng sao đổi thêm phút chơi game, xem video, <b>trong giới hạn bố mẹ đặt</b>.</span></li>
+          <li><span>🔒</span><span><b>Phải học xong mới được đổi</b>. Giờ thưởng tự xếp trước giờ tắt màn hình, không lấn giờ ngủ.</span></li>
+          <li><span>🛡️</span><span><b>Không "tích trước" được</b>: mỗi việc chỉ tích được khi sắp đến giờ. Bố mẹ xem lịch sử và hủy sao nếu con chưa làm thật.</span></li>
+        </ul>
+        <p class="quote">Con có động lực, bố mẹ vẫn giữ quyền kiểm soát.</p>
+      </div>
+    </div>
+
+    <div class="feat">
+      <div class="shot"><img src="anh/bao-cao.webp" alt="Thẻ báo cáo trong ngày: 7 trên 10 việc đã xong, cộng 10 sao, 3 việc xong sớm" width="400" height="773" loading="lazy"></div>
+      <div>
+        <h3>📸 Cuối ngày, con gửi báo cáo cho bố mẹ</h3>
+        <p class="lead">Dù bố mẹ đi làm hay đi công tác, vẫn biết con đã làm được gì trong ngày.</p>
+        <ul>
+          <li><span>✅</span><span>Việc nào đã xong, <b>xong lúc mấy giờ</b>, việc nào xong sớm, việc nào chưa làm.</span></li>
+          <li><span>📤</span><span>Gửi <b>một chạm</b> qua Zalo, Tin nhắn, hoặc chụp màn hình thẻ báo cáo.</span></li>
+          <li><span>💬</span><span>Một cơ hội để khen con mỗi tối, thay cho những câu nhắc nhở.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feat rev">
+      <div class="shot wide"><img src="anh/ipad.webp" alt="Thời gian biểu cả tuần trên iPad, mỗi ngày một cột có màu theo loại việc" width="820" height="1078" loading="lazy"></div>
+      <div>
+        <h3>🗓️ Cả tuần rõ ràng, in ra dán bàn học</h3>
+        <p class="lead">Xem cả tuần trên iPad dạng bảng màu, trên điện thoại dạng danh sách từng ngày.</p>
+        <ul>
+          <li><span>🖼️</span><span><b>Lưu thành ảnh</b> hoặc <b>in ra giấy</b> để dán ở góc học tập.</span></li>
+          <li><span>🌙</span><span>Tối học thêm về muộn? Phần mềm tự <b>lùi giờ ngủ</b> và cho con <b>dậy muộn hơn</b> sáng hôm sau, nếu buổi sáng không có lịch.</span></li>
+          <li><span>⚠️</span><span>Tự cảnh báo khi con <b>ngủ thiếu</b>, <b>học quá 8 tiếng/ngày</b> hoặc lịch bị trùng.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="feat">
+      <div class="shot"><img src="anh/phu-huynh.webp" alt="Góc phụ huynh: nhập thời khóa biểu từng ngày" width="400" height="773" loading="lazy"></div>
+      <div>
+        <h3>🔐 Góc phụ huynh có mật khẩu</h3>
+        <p class="lead">Chỉ bố mẹ mới sửa được lịch và các giới hạn. Con không tự "nới" giờ chơi được.</p>
+        <ul>
+          <li><span>🏫</span><span>Nhập thời khóa biểu <b>từng ngày</b>, dễ dàng ngay trên điện thoại.</span></li>
+          <li><span>💡</span><span>Chọn <b>kỹ năng cho con rèn thêm</b>: lập trình làm game, tiếng Anh, nhạc cụ, vẽ, nấu ăn… có lộ trình 6 tháng.</span></li>
+          <li><span>🎛️</span><span>Tùy chỉnh giờ ngủ, số phút tự học, giờ chơi game, xem video, giá đổi sao…</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KHOA HỌC -->
+<section class="science">
+  <div class="wrap center">
+    <span class="eyebrow">Không xếp lịch theo cảm tính</span>
+    <h2>Dựa trên khuyến nghị <span class="hl">sức khỏe cho trẻ</span></h2>
+    <div class="stats">
+      <div class="stat"><div class="e">😴</div><b>8–10 giờ</b><span>ngủ mỗi đêm</span><small>Tuổi 13–18 (AASM). Tắt màn hình 60 phút trước khi ngủ</small></div>
+      <div class="stat"><div class="e">⚽</div><b>60 phút</b><span>vận động mỗi ngày</span><small>Tuổi 5–17 (WHO). Ngày có tiết Thể dục thì giảm bớt</small></div>
+      <div class="stat"><div class="e">📵</div><b>&lt; 1–2 giờ</b><span>màn hình giải trí</span><small>Ngày thường / cuối tuần (AAP). Học xong mới chơi</small></div>
+      <div class="stat"><div class="e">📚</div><b>40' + 10'</b><span>học rồi nghỉ</span><small>Xen kẽ môn tự nhiên, xã hội. Tổng giờ học dưới 8 tiếng/ngày</small></div>
+    </div>
+    <p class="note">Đây là các mức khuyến nghị chung. Bố mẹ điều chỉnh được mọi con số cho phù hợp với sức khỏe và thói quen của con.</p>
+  </div>
+</section>
+
+<!-- TIN CẬY -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">Yên tâm khi cho con dùng</span>
+    <h2>An toàn, riêng tư và <span class="hl">miễn phí</span></h2>
+    <div class="trust" style="text-align:left">
+      <div><div class="e">🚫</div><h3>Không quảng cáo</h3><p>Không có quảng cáo, không có mua bán trong phần mềm. Con không bị dẫn đi đâu khác.</p></div>
+      <div><div class="e">🏠</div><h3>Dữ liệu ở trên máy</h3><p>Lịch và tiến độ của con chỉ lưu trên máy của con, không gửi lên máy chủ nào.</p></div>
+      <div><div class="e">🙅</div><h3>Không cần đăng ký</h3><p>Không hỏi email, số điện thoại hay tài khoản. Mở link, cài lên màn hình chính là dùng.</p></div>
+      <div><div class="e">📴</div><h3>Dùng cả khi mất mạng</h3><p>Sau lần mở đầu tiên, phần mềm chạy được cả khi không có Internet.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BẮT ĐẦU -->
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="start">
+      <div>
+        <h2>Bắt đầu trong <span style="color:#ffd166">2 phút</span></h2>
+        <ol>
+          <li><b>iPhone, iPad</b>: mở link bằng <b>Safari</b>, bấm nút Chia sẻ ⬆️, chọn <b>"Thêm vào MH chính"</b>.</li>
+          <li><b>Android</b>: mở link bằng <b>Chrome</b>, bấm <b>"Cài đặt ứng dụng"</b>.</li>
+          <li>Mở biểu tượng 🌞 <b>Ngày của em</b>, nhập tên con, tạo mật khẩu phụ huynh, nhập thời khóa biểu. Xong!</li>
+        </ol>
+        <a class="btn pri" href="./">🌞 Mở "Ngày của em"</a>
+      </div>
+      <div class="qr" id="qrBox" hidden>
+        <div id="qr"></div>
+        <p>Đang xem trên máy tính?<br>Quét mã bằng camera điện thoại</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HỎI ĐÁP -->
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">Câu hỏi thường gặp</span>
+    <h2>Bố mẹ hay hỏi</h2>
+    <div class="faq" style="text-align:left">
+      <details><summary>Có mất phí không?</summary><p>Hoàn toàn miễn phí, không quảng cáo, không có mua bán trong phần mềm.</p></details>
+      <details><summary>Con học buổi sáng (hoặc buổi chiều) có dùng được không?</summary><p>Được. Trong Góc phụ huynh có nút chọn nhanh "Con học buổi sáng" hoặc "Con học buổi chiều". Phần mềm tự điền giờ các tiết, giờ dậy, giờ ngủ, và xếp giờ tự học phù hợp.</p></details>
+      <details><summary>Dùng trên máy nào?</summary><p>iPhone, iPad, điện thoại Android và máy tính (Chrome, Edge, Safari). Trên iPhone, iPad cần mở bằng Safari rồi "Thêm vào MH chính".</p></details>
+      <details><summary>Phần mềm nhắc giờ bằng cách nào?</summary><p>Trong Góc phụ huynh → Giờ giấc → Nhắc giờ, bấm "Tải lịch nhắc" rồi thêm vào ứng dụng Lịch của điện thoại. Máy sẽ báo chuông đúng giờ mỗi ngày, kể cả khi đang khóa màn hình.</p></details>
+      <details><summary>Con có thể "gian lận" để lấy sao không?</summary><p>Mỗi việc chỉ tích "Xong" được khi còn chưa đầy 60 phút nữa là đến giờ bắt đầu. Bố mẹ xem được lịch sử (việc gì, lúc mấy giờ) và bấm "Hủy" để thu lại sao nếu con chưa làm thật. Giới hạn đổi giờ chơi mỗi ngày do bố mẹ đặt và được bảo vệ bằng mật khẩu.</p></details>
+      <details><summary>Nhà có hai con thì sao?</summary><p>Mỗi con dùng một máy riêng. Mỗi máy có lịch, số sao và mật khẩu riêng, không ảnh hưởng nhau.</p></details>
+      <details><summary>Dữ liệu có bị mất không?</summary><p>Dữ liệu lưu trên máy của con. Mỗi tuần nên vào Góc phụ huynh → Dữ liệu → "Lưu ra file" để sao lưu. Khi đổi máy thì mở lại file đó là có đủ lịch và số sao.</p></details>
+      <details><summary>Bố mẹ có xem được trên máy của mình không?</summary><p>Với bản này, bố mẹ theo dõi qua báo cáo con gửi mỗi ngày. Mọi cài đặt được sửa trực tiếp trên máy của con, trong Góc phụ huynh có mật khẩu.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2>Tối nay, thử cùng con nhé 🌞</h2>
+    <p class="lead" style="margin:12px auto 0">Ngồi cùng con 5 phút nhập thời khóa biểu, rồi để con tự chọn kỹ năng muốn học và phần thưởng muốn đổi. Lịch do con cùng xây dựng sẽ được con giữ lâu hơn.</p>
+    <a class="btn pri" href="./">📲 Dùng miễn phí ngay</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>🌞 Ngày của em – Thời gian biểu cho học sinh</span>
+    <span><a href="huong-dan.html">Hướng dẫn sử dụng</a> · <a href="privacy.html">Chính sách quyền riêng tư</a></span>
+  </div>
+</footer>
+
+<script src="vendor/qrcode.min.js"></script>
+<script>
+// Mã QR trỏ tới phần mềm (cùng thư mục với trang này) – chỉ hiện trên màn hình lớn
+(function(){
+  try{
+    if(!window.qrcode || !/^https?:$/.test(location.protocol) || matchMedia('(max-width:900px)').matches) return;
+    var url=new URL('./', location.href).href, q=qrcode(0,'M'); q.addData(url); q.make();
+    document.getElementById('qr').innerHTML=q.createSvgTag({cellSize:4,margin:1,scalable:true});
+    document.getElementById('qrBox').hidden=false;
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
